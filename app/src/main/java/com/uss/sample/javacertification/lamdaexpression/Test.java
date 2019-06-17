@@ -1,9 +1,5 @@
 package com.uss.sample.javacertification.lamdaexpression;
 
-import org.reactivestreams.Subscription;
-
-import io.reactivex.Observable;
-
 public class Test {
 
 
