@@ -80,6 +80,27 @@
         // dos something
         } 
         
+- **Use *Comparable* Interface to compare one object to other**
+
+        public class Person implements Comparable<Person>{
+        
+            @Override
+            public int compareTo(Person person) {
+                if(this.getAge() > person.getAge() ){
+                   return 1;
+                }else if(this.getAge() < person.getAge()){
+                    return -1;
+                }
+                else
+                   return 0;
+            }  
+            
+        }
+
+- **compare(obj1, obj2) is the method of the *Comparator* interface that is called on some object to compare two other objects** 
+
+        The Comparator interface is typically used for sorting data structures (such as Collections.sort or Arrays.sort).             
+        
 - **Use stream api on collections** (**filter the list of people who is upper or equal to age 50**)
 
 
