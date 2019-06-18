@@ -121,9 +121,9 @@
 - **Method reference in lambda expression**  
 There are four types of method references (assuming a class named Person with **getName()** method and a value named **p of that type**)
 
-**Type**                                  | **Method Reference**        | **Lambda Expression**  | **Traditional**
----                                       |---                          | ---                    | ---
+|**Type**                                  | **Method Reference**        | **Lambda Expression**  | **Traditional**|
+|---                                       |---                          | ---                    | ---            |
 
-Reference to a static method              |Math::square                 |n-> Math.square(n)      |void square(n)   {Math.square(n)}             
-Reference to a constructor                |Capital::new                 |i-> new Capital(i)      |public Capital(i) { new Capital(i)}
-Reference to an instance method           |Person::getName              |p-> p.getName()         |public String getName(Person p){p.getName()}
+|Reference to a static method             |Math::square                 |n-> Math.square(n)      |void square(n)   {Math.square(n)}|            
+|Reference to a constructor                |Capital::new                 |i-> new Capital(i)      |public Capital(i) { new Capital(i)}|
+|Reference to an instance method           |Person::getName              |p-> p.getName()         |public String getName(Person p){p.getName()}|
