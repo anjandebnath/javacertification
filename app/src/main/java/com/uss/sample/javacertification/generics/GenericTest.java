@@ -64,7 +64,7 @@ public class GenericTest {
         //olderList.stream().forEach(person -> System.out.println(person.getAge()));
 
 
-        // if we want to use multiple conditions then we need o use Predicate
+        // if we want to use multiple conditions then we need to use Predicate
         Predicate<Person> nameNotNull = p -> p.getName() != null;
         Predicate<Person> ageAbove60 = p -> p.getAge() >= 60;
 
@@ -73,10 +73,10 @@ public class GenericTest {
                 .filter(multipleConditions)
                 .collect(Collectors.toList());
 
-        //multipleFilterd.stream().forEach(person -> System.out.println(person.getAge()));
+        multipleFilterd.stream().forEach(System.out::println);
 
-        PersonPredicates.filterPersons(l, PersonPredicates.isYearAbove50())
-                .forEach(person -> System.out.println(person.getAge()));
+        /*PersonPredicates.filterPersons(l, PersonPredicates.isYearAbove50())
+                .forEach(System.out::println);*/
 
     }
 
