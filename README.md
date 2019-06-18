@@ -13,9 +13,48 @@
 ## Key points to code review
 
 - Use singleton in a smart way so it is well managed in multi thread.
+
+        public static class SingleTonClassHolder{
+            public static MultyThreadSingleTon multyThreadSingleTon = new MultyThreadSingleTon();
+        }
+        
+        public static MultyThreadSingleTon getInstance(){
+                return SingleTonClassHolder.multyThreadSingleTon;
+            }
+        
 - Use static block to load any thing that is necessary to load during JVM loads the class in memory.
+
+        private static int count;
+        
+            static{
+                // code in this static block will be executed when
+                // the JVM loads the class into memory
+                count =1;
+            }
+        
+            public Counter(){
+                //A constructor will be invoked when an instance of the
+                //class is created, while the static block will be invoked when the JVM loads the corresponding class.
+                count++;
+            }
+            
 - Java 8 has introduced **default** keyword which is susceptible to define class body inside interface.
+
+        public interface Interface1 {
+        
+            default void foo(){
+                System.out.println("Interface1's foo");
+            }
+        }
+        
 - If an interface contain only one abstract method then use @FunctionalInterface annotation.
+
+        @FunctionalInterface // that has one abstract method, so it will compile cleanly
+        public interface AnnotationTest {
+        
+            abstract int foo();
+        }
+
 - If 2 different interfaces contain method that has same name then it is called diamond problem and in that case we can use **super** *Interface1.super.method()*.
 
         @Override
