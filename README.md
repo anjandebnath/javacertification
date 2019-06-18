@@ -78,4 +78,24 @@
 
         for(Person p: personList)  {
         // dos something
-        }       
+        } 
+        
+- Use stream api on collections (**filter the list of people who is upper or equal to age 50**)
+
+
+        List<Person> olderList = new ArrayList<>();
+        for(Person person: l ){
+             if(person.getAge() >= 50){
+                 olderList.add(person);
+             }
+        }
+        olderList.forEach(person -> System.out.println(person.getAge()));
+
+
+        // now using stream api to filter the list using one conditions
+        olderList = l.stream()
+                     .filter(p->p.getAge()>= 50)
+                     .collect(Collectors.toList());
+        olderList.stream().forEach(person -> System.out.println(person.getAge()));  
+        
+                    
