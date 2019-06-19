@@ -147,3 +147,41 @@ There are four types of method references (assuming a class named Person with **
 |Reference to a static method              |Math::square                 |n-> Math.square(n)      |void square(n)   {Math.square(n)}|            
 |Reference to a constructor                |Capital::new                 |i-> new Capital(i)      |public Capital(i) { new Capital(i)}|
 |Reference to an instance method           |Person::getName              |p-> p.getName()         |public String getName(Person p){p.getName()}|
+
+
+
+- **Use Callable and Future with ExecutorService because Runnable does not return any value after execution.**
+
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        //The Callable interface is similar to Runnable,
+        // they're both designed to be executed by another thread,
+        // a Runnable however, does not return a result and cannot throw a checked exception.
+        Callable c = () -> {
+
+            int n=0;
+            for (int i=0; i< 100; i++){n+= i;}
+            return n;
+
+        };
+
+
+        Future<Long> future = executor.submit(c);
+        try {
+
+            Long result = future.get(); //waits for the thread to complete
+            System.out.println(result);
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        
+- We can use `Atomic` that support lock-free and thread-safe programming on single variables. Among them, the `AtomicInteger` class is a wrapper class for an int value that allows it to be updated atomically. 
+        
+        AtomicInteger at = new AtomicInteger(0); 
+        
+        
