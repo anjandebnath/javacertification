@@ -206,10 +206,10 @@ There are four types of method references (assuming a class named Person with **
    
   - Search data using 
   
-      1. `For searching operations findFirst() and findAny(), matching elements may not be present in the Stream, so they return Optional<T>`
-      2. `The class java.util.Optional is a holder for value that can be null`
-      3. `In parallel streams, findAny() is faster to use than findFirst()`
-      4. `searching methods such as findFirst() are short-circuiting. Once the result is determined, the rest of the elements in the stream are
+  1. `For searching operations findFirst() and findAny(), matching elements may not be present in the Stream, so they return Optional<T>`
+  2. `The class java.util.Optional is a holder for value that can be null`
+  3. `In parallel streams, findAny() is faster to use than findFirst()`
+  4. `searching methods such as findFirst() are short-circuiting. Once the result is determined, the rest of the elements in the stream are
           not processed.`
       
   
@@ -226,7 +226,8 @@ There are four types of method references (assuming a class named Person with **
           System.out.println("search of first "+first.getAsInt());
           
           
-      5. Optional<String> empty  = Optional.empty();
+          
+  5.     Optional<String> empty  = Optional.empty();
          Optional<String> string = Optional.of("Hello");
          Optional<String> empty2  = Optional.ofNullable(null);    
         
