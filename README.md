@@ -184,10 +184,17 @@ There are four types of method references (assuming a class named Person with **
         
         AtomicInteger at = new AtomicInteger(0); 
         
+ 
+ ## Lambda Expression methods in detail       
         
-- We can `Extract` data from a stream and also we can `Search`  data from a string.
+        
+        
+        
+  ## Stream API in detail 
+        
+- We can `Extract` data from a stream and also we can `Search`  data from a stream.
 
-  - Extract data using peek() & map()
+  - **Extract data using peek() & map()**
   
         List<String> str = new ArrayList<>();
         str.add("the");
@@ -204,7 +211,7 @@ There are four types of method references (assuming a class named Person with **
        
         
    
-  - Search data using 
+  - **Search data using findXxx() or xxxMatch()**
   
   1. `For searching operations findFirst() and findAny(), matching elements may not be present in the Stream, so they return Optional<T>`
   2. `The class java.util.Optional is a holder for value that can be null`
@@ -229,5 +236,94 @@ There are four types of method references (assuming a class named Person with **
           
   5.     Optional<String> empty  = Optional.empty();
          Optional<String> string = Optional.of("Hello");
-         Optional<String> empty2  = Optional.ofNullable(null);    
+         Optional<String> empty2  = Optional.ofNullable(null); 
+          
+         
+  - **Stream Data Methods**
+  
         
+        `max(), min(), count()`   
+        
+        Comparator<String> byLength = (s1, s2) -> Integer.compare( s1.length(), s2.length());
+        Optional<String> max = Stream.of("hello","good bye", "black", "white", "good", "bad")
+                .max(byLength); //returns "good bye"                            
+        
+  - **Stream Calculation Methods**
+  
+  
+         `max(), min(), average(), sum()` 
+         
+         OptionalInt max = IntStream.of(1, 34, 667, 3, 32, 23).max(); // max() returns 667
+         
+  - **Sort a collection using Stream api**
+  
+  
+          public static void main(String []args) {
+          
+              List words = Arrays.asList("follow your heart but take your brain with you".split(" "));
+              words.stream()
+              .distinct()     // to remove duplicates and get unique
+              .sorted()
+              .forEach(System.out::println);
+          } 
+          
+  - **If you want to compare using multiple criteria, in Java 8 there's a new method to make this easily, Comparator.thenComparing()**
+  
+           
+          Comparator<String> byLengthComparator = (s1, s2) -> Integer.compare( s1.length(), s2.length());
+          Comparator<String> byLettersComparator = (s1, s2) -> s1.compareTo(s2);
+          
+          Stream.of("hello","good bye", "black", "white", "good", "bad")
+                    .sorted(byLengthComparator.thenComparing(byLettersComparator))
+                    .forEach(s -> System.out.println(s));    
+                    
+     
+  - **Save result into collection using the collect method and group/partition data using the Collectors class**
+  
+  
+          //to collect the elements of a list to another list
+          List<String> letters = new ArrayList<>();
+          letters.add("H");
+          letters.add("e");
+          letters.add("l");
+          letters.add("l");
+          letters.add("o");
+          List<String> word = letters.stream().collect(() -> new ArrayList<>(), // Supplier<R> supplier
+                  (c, s) -> c.add(s.toUpperCase()),                             // BiConsumer<R,? super T> accumulator
+                  (c1, c2) -> c1.addAll(c2));                                   // BiConsumer<R,R> combiner
+  
+          word.forEach(s1-> System.out.println(s1)); 
+          
+         
+  - **Use of merge() and flatMap() methods of the Stream API**  
+  
+  `The flatMap() method operates on elements just like map() method. However, flatMap() flattens
+   the streams that result from mapping each of its elements into one flat stream.`
+   
+   
+   
+           List<Student> physicsStudents = new ArrayList<>();
+           physicsStudents.add(new Student(101, "Paul"));
+           physicsStudents.add(new Student(102,"Adams"));
+           physicsStudents.add(new Student(103,"Pat"));
+           physicsStudents.add(new Student(104,"Symcox"));
+   
+           List<Student> chemistryStudents = new ArrayList<>();
+           chemistryStudents.add(new Student(201, "alexa"));
+           chemistryStudents.add(new Student(202,"Mondy"));
+           chemistryStudents.add(new Student(201, "Racho"));
+   
+   
+   
+           List<Course> courses = new ArrayList<>();
+           courses.add(new Course("Physics", physicsStudents));
+           courses.add(new Course("Chemistry", chemistryStudents));
+   
+           List<String> students = courses.stream()
+                   .flatMap(course -> course.getStudents().stream()) //Get the students of each course
+                   .map(student -> student.getName()) //Now that we have a stream with all the students, we extract their name
+                   .collect(Collectors.toList());
+   
+           students.forEach(System.out::println);
+  
+                        
