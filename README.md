@@ -185,3 +185,48 @@ There are four types of method references (assuming a class named Person with **
         AtomicInteger at = new AtomicInteger(0); 
         
         
+- We can `Extract` data from a stream and also we can `Search`  data from a string.
+
+  - Extract data using peek() & map()
+  
+        List<String> str = new ArrayList<>();
+        str.add("the");
+        str.add("good");
+        str.add("bad");
+        str.add("ugly");
+
+        str.stream()
+                .filter(s -> s.length() > 3)
+                .peek(s -> System.out.println("Filtered value: " + s)) // peek()
+                .map(s -> s.toUpperCase())                             // map()
+                .peek(s -> System.out.println("Mapped value: " + s))
+                .collect(Collectors.toList());
+       
+        
+   
+  - Search data using 
+  
+      1. `For searching operations findFirst() and findAny(), matching elements may not be present in the Stream, so they return Optional<T>`
+      2. `The class java.util.Optional is a holder for value that can be null`
+      3. `In parallel streams, findAny() is faster to use than findFirst()`
+      4. `searching methods such as findFirst() are short-circuiting. Once the result is determined, the rest of the elements in the stream are
+          not processed.`
+      
+  
+          Optional<Integer> any = Stream.of(1, 10, 5, 3, 13, 20)
+                  .filter(i -> i % 2 == 0)
+                  .findAny(); //can return 10 or 20
+  
+          System.out.println("search of any "+any);
+  
+          OptionalInt first = IntStream.of(1, 10, 5, 3, 13, 20)
+                  .filter(i -> i % 2 == 0)
+                  .findFirst(); // return 10
+  
+          System.out.println("search of first "+first.getAsInt());
+          
+          
+      5. Optional<String> empty  = Optional.empty();
+         Optional<String> string = Optional.of("Hello");
+         Optional<String> empty2  = Optional.ofNullable(null);    
+        
