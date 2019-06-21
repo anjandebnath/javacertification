@@ -185,9 +185,42 @@ There are four types of method references (assuming a class named Person with **
         AtomicInteger at = new AtomicInteger(0); 
         
  
- ## Lambda Expression methods in detail       
+ ## Lambda Expression methods in detail    
+ 
+- **Built-in Functional Interfaces**
+
+|**Functional Interface**         | **Brief Description**                                | **Common Use**         
+|---                              |---                                                   | ---                    
+|Predicate<T>                     |Checks a condition and returns a boolean              |filter(Predicate<? super E> filter)                 
+|Consumer<T>                      |Takes an argument but returns nothing                 |foreach(Consumer<? super T> action)      
+|Function<T, R>                   |Take an argument and return a result                  |map(Function<? super T, ? super R> function) 
+|Supplier<T>                      |Takes nothing but returns a value to the caller       |generate(Supplier<? super T> supplier)
+
+
+- **primitive versions of functional interfaces**
+
+
+        instead of using
+        
+        Predicate<Integer> p = i -> i > 10;
+        You can use
+        
+        IntPredicate p = i -> i > 10;
+
+
+
+-**A BiFunction is similar to Function , but the difference is that it takes two arguments: it takes arguments of generic types T and U and returns an object of generic type R**.
+        
+        BiFunction<String, String, String> concatStr = (x, y) -> x + y;
+        System.out.println("BiFunction:: "+concatStr.apply("hello ", "world"));  
         
         
+-**UnaryOperator is a functional interface that receives a
+           value of a certain type and returns a value of the same type.**    
+           
+           UnaryOperator<Integer> unary = v -> v * 10;
+           // This means the same as the UnaryOperator above.
+           Function<Integer, Integer> function = v -> v * 10;      
         
         
   ## Stream API in detail 

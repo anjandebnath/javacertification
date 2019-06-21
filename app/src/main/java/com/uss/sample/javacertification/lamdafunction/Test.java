@@ -24,7 +24,7 @@ public class Test {
                 .filter(s -> s.length() > 5)
                 .collect(Collectors.<String>toList());
 
-        System.out.print(filtered);
+        System.out.print("Predicate::"+filtered);
 
 
         Predicate<String> isALongWord = s -> s.length() > 10;
@@ -50,7 +50,7 @@ public class Test {
         //A BiFunction is similar to Function , but the difference is that it takes two arguments: it takes
         //arguments of generic types T and U and returns an object of generic type R .
         BiFunction<String, String, String> concatStr = (x, y) -> x + y;
-        System.out.println(concatStr.apply("hello ", "world"));
+        System.out.println("BiFunction:: "+concatStr.apply("hello ", "world"));
 
 
         //UnaryOperator is a functional interface that receives a
@@ -59,7 +59,7 @@ public class Test {
         // This means the same as the UnaryOperator above.
         Function<Integer, Integer> function = v -> v * 10;
 
-        System.out.println(unary.apply(10));
+        System.out.println("Unary:: "+unary.apply(10));
         System.out.println(function.apply(10));
 
 
