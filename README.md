@@ -488,4 +488,31 @@ There are four types of method references (assuming a class named Person with **
          
 - We can use `Atomic` that support lock-free and thread-safe programming on single variables. Among them, the `AtomicInteger` class is a wrapper class for an int value that allows it to be updated atomically. 
          
-         AtomicInteger at = new AtomicInteger(0);                          
+         AtomicInteger at = new AtomicInteger(0);    
+         
+- Fork/Join  framework
+  
+  - The fork/join framework is available since Java 7, to make it easier to write parallel programs.
+  - **Dividing** the task into smaller tasks is `forking`, and **merging** the results from the smaller tasks is `joining`.
+  - The Fork/Join framework uses the **work-stealing algorithm**: when a worker thread completes its work and is free, it takes (or “steals”) work from other threads that are still busy doing some work.  
+  
+  
+  -**It looks obvious to call fork() for both the subtasks (if you are splitting in two subtasks) and call join() two times. It is correct—but inefficient. Why?** 
+  
+          Well,basically you are creating more parallel tasks than are useful. In this case, the original
+       thread will be waiting for the other two tasks to complete, which is inefficient
+       considering task creation cost. That is why you call fork() once and call compute()
+       for the second task. 
+       
+  
+  - **The placement of fork() and join() calls are very important.**
+   - For instance, let’s assume that you place the calls in the following order:
+    
+    
+        first.fork();
+        resultFirst = first.join();
+        resultSecond = second.compute();
+        
+   - This usage is a serial execution of two tasks, since the second task starts executing
+    only after the first is complete. Thus, it is **less efficient even than its sequential
+    version** since this version also includes cost of the task creation.
