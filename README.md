@@ -148,43 +148,7 @@ There are four types of method references (assuming a class named Person with **
 |Reference to a constructor                |Capital::new                 |i-> new Capital(i)      |public Capital(i) { new Capital(i)}|
 |Reference to an instance method           |Person::getName              |p-> p.getName()         |public String getName(Person p){p.getName()}|
 
-
-
-- **Use Callable and Future with ExecutorService because Runnable does not return any value after execution.**
-
-
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-
-        //The Callable interface is similar to Runnable,
-        // they're both designed to be executed by another thread,
-        // a Runnable however, does not return a result and cannot throw a checked exception.
-        Callable c = () -> {
-
-            int n=0;
-            for (int i=0; i< 100; i++){n+= i;}
-            return n;
-
-        };
-
-
-        Future<Long> future = executor.submit(c);
-        try {
-
-            Long result = future.get(); //waits for the thread to complete
-            System.out.println(result);
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        
-        
-- We can use `Atomic` that support lock-free and thread-safe programming on single variables. Among them, the `AtomicInteger` class is a wrapper class for an int value that allows it to be updated atomically. 
-        
-        AtomicInteger at = new AtomicInteger(0); 
-        
- 
+     
  ## Lambda Expression methods in detail    
  
 - **Built-in Functional Interfaces**
@@ -360,7 +324,7 @@ There are four types of method references (assuming a class named Person with **
            students.forEach(System.out::println);
   
 
-## Exception and Assertion
+ ## Exception and Assertion
 
  - The only situation where a finally block will not be executed, it's if the program exits abruptly
   (**either by calling System.exit() or by a fatal error that causes the process to abort**). 
@@ -387,8 +351,35 @@ There are four types of method references (assuming a class named Person with **
    
         `public Scanner(File source) throws FileNotFoundException {`
         
-   So, any method that invokes this constructor should either handle this exception or add a throws clause to declare that the method can throw this exception.     
-  
+   So, any method that invokes this constructor should either handle this exception or add a throws clause to declare that the method can throw this exception.    
+   
+- **While implementing a method, it is acceptable to either provide the throws clause
+    listing the same exception type as the base method or a more specific type than
+    the base method.**
+    
+    
+        interface IntReader {
+            int readIntFromFile() throws IOException;
+        }   
+        
+        
+        public class ThrowClause1 implements IntReader{
+        
+            @Override
+            public int readIntFromFile() throws FileNotFoundException {
+                return 0;
+            }
+        }
+        
+   - **Unchecked exceptions can still be added or removed from the contract when compared to the base class method’s throws clause.**
+   
+   
+            @Override
+            public int readIntFromFile() throws FileNotFoundException, NoSuchElementException {
+                return 0;
+            }    
+    
+   - NoSuchElementException can get thrown from the readIntFromFile() method. This exception is an unchecked exception.
 
 - **Static initialization blocks cannot throw any checked exceptions**  
     Why? 
@@ -399,5 +390,102 @@ There are four types of method references (assuming a class named Person with **
      
      
 - **An overriding method cannot declare more checked exceptions in the throws clause
-    than the list of exceptions declared in the throws clause of the base method.**     
-                        
+    than the list of exceptions declared in the throws clause of the base method.**  
+    
+    
+- **Use Autoclose resources with a try-with-resources statement**
+
+  - It is a fairly common mistake by Java programmers to forget releasing resources, even in the finally block. 
+  - Normally, a finally block is used to ensure that a resource is closed whether the try statement completes normally or not.
+  - **However, Java 7 introduced the try-with-resources statement, which ensures that each resource is closed at the end of the statement.**
+  
+          public String fileOperation(String path){
+              
+              try (BufferedReader brr = new BufferedReader(new FileReader(path))) {
+                  return brr.readLine();
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+              
+              return null;
+          } 
+          
+  - **Can you provide try-with-resources statements without any explicit catch or finally blocks?** 
+    Yes! Remember that a try block can be associated with a catch block, finally block, or both. 
+    
+  - **You may declare more than one resources in a try-with-resources statement, separated by a semicolon.**    
+   
+  
+        try (BufferedReader br1 = new BufferedReader(new FileReader(path1)); 
+              BufferedReader br2 = new BufferedReader(new FileReader(path2))) {
+                String l1 =  br1.readLine();
+                String l2 =  br2.readLine();
+            }         
+  
+  
+  
+- We can create our own exceptions by extending the `java.lang.Exception` class..You can also extend from `RuntimeException`, to make your exception unchecked (so it doesn't have to be catched if you don't want to).   
+
+- You can implement the **java.lang.AutoCloseable** or **java.lang.Closeable** interfaces in your own classes and use them with a try-with-resources block.    
+
+
+        public class MyAutoCloseable implements AutoCloseable {
+        
+            @Override
+            public void close() throws Exception {
+                System.out.println("Closed!");
+            }
+        
+            public void someMethod() {
+                System.out.println("Doing something");
+            }
+        }
+        
+        
+        
+        public static void main(String []args) throws FileNotFoundException {
+        
+            try(MyAutoCloseable autoCloseable = new MyAutoCloseable()){
+                  autoCloseable.someMethod();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        
+            }   
+            
+            
+ ## Java Concurrency 
+ 
+- **Use Callable and Future with ExecutorService because Runnable does not return any value after execution.**
+ 
+ 
+         ExecutorService executor = Executors.newSingleThreadExecutor();
+ 
+         //The Callable interface is similar to Runnable,
+         // they're both designed to be executed by another thread,
+         // a Runnable however, does not return a result and cannot throw a checked exception.
+         Callable c = () -> {
+ 
+             int n=0;
+             for (int i=0; i< 100; i++){n+= i;}
+             return n;
+ 
+         };
+ 
+ 
+         Future<Long> future = executor.submit(c);
+         try {
+ 
+             Long result = future.get(); //waits for the thread to complete
+             System.out.println(result);
+ 
+         } catch (ExecutionException e) {
+             e.printStackTrace();
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         }
+         
+         
+- We can use `Atomic` that support lock-free and thread-safe programming on single variables. Among them, the `AtomicInteger` class is a wrapper class for an int value that allows it to be updated atomically. 
+         
+         AtomicInteger at = new AtomicInteger(0);                          
