@@ -359,4 +359,45 @@ There are four types of method references (assuming a class named Person with **
    
            students.forEach(System.out::println);
   
+
+## Exception and Assertion
+
+ - The only situation where a finally block will not be executed, it's if the program exits abruptly
+  (**either by calling System.exit() or by a fatal error that causes the process to abort**). 
+  
+  
+- **Why do we need the throws clause? By looking at the throws clause, you can get a clear idea of what exceptions the method can
+    throw.**  
+    
+- **A method can throw checked exceptions; the clause throw specifies these checked exceptions in the method signature.**    
+
+    
+        public class ThrowClause1 {
+        
+            public static void main(String []args) {
+                Scanner consoleScanner = new Scanner(new File("integer.txt"));
+                System.out.println("You typed the integer value: " + consoleScanner.nextInt());
+            }
+        }
+        
+        
+   - This code will result in a compiler error of **unreported exception FileNotFoundException; must
+   be caught or declared to be thrown**. If you look at the declaration of this Scanner method, you’ll see a
+   throws clause:
+   
+        `public Scanner(File source) throws FileNotFoundException {`
+        
+   So, any method that invokes this constructor should either handle this exception or add a throws clause to declare that the method can throw this exception.     
+  
+
+- **Static initialization blocks cannot throw any checked exceptions**  
+    Why? 
+    
+    `Remember that static initialization blocks are invoked when the class is loaded, so there is no
+     way to handle the thrown exceptions in the caller. Further, there is no way to declare
+     the checked exceptions in a throws clause (because they are blocks, not methods). ` 
+     
+     
+- **An overriding method cannot declare more checked exceptions in the throws clause
+    than the list of exceptions declared in the throws clause of the base method.**     
                         
