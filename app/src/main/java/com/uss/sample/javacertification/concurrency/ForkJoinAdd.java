@@ -19,6 +19,8 @@ public class ForkJoinAdd extends RecursiveTask<Long> {
     protected Long compute() {
 
         int length = end - start;
+
+        // here single thread can perform the task
         if(length < THRESH_HOLD){
             return add();
         }

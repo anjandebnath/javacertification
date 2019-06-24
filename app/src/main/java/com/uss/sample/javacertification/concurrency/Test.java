@@ -1,16 +1,10 @@
 package com.uss.sample.javacertification.concurrency;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
 public class Test {
 
     public static void main(String args[]){
 
-        // The ExecutorService interface represents a mechanism that executes tasks in the background.
+    /*    // The ExecutorService interface represents a mechanism that executes tasks in the background.
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
         //The Callable interface is similar to Runnable,
@@ -36,7 +30,14 @@ public class Test {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        executor.shutdown();
+        executor.shutdown();*/
+
+
+        System.out.println("Sum of 1 to 1_000_000:: "+ForkJoinAdd.startForkJoinSum(1_000_000));
+
+        SumOfNUsingForkJoin.countForkJoinSum();
+
+
 
     }
 }

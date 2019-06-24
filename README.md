@@ -516,3 +516,5 @@ There are four types of method references (assuming a class named Person with **
    - This usage is a serial execution of two tasks, since the second task starts executing
     only after the first is complete. Thus, it is **less efficient even than its sequential
     version** since this version also includes cost of the task creation.
+    
+  - Each worker thread in the Fork/Join framework has a work queue, which is implemented using a **Deque.**
