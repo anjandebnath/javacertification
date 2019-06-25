@@ -139,6 +139,10 @@
             return 5;
         });  
         
+        
+- **If an enum contains attributes and methods, their definition must always come after the list of constants in the enum and the list of constants must be terminated by a semicolon.**
+        
+        
 - **Method reference in lambda expression**  
 There are four types of method references (assuming a class named Person with **getName()** method and a value named **p of that type**)
 
@@ -538,3 +542,18 @@ There are four types of method references (assuming a class named Person with **
     version** since this version also includes cost of the task creation.
     
   - Each worker thread in the Fork/Join framework has a work queue, which is implemented using a **Deque.**
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

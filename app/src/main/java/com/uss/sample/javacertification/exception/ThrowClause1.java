@@ -23,6 +23,7 @@ public class ThrowClause1 implements IntReader{
 
     public String fileOperation(String path){
 
+        // its the try-with-resource statement that ensure the object gets closed automatically
         try (BufferedReader brr = new BufferedReader(new FileReader(path))) {
             return brr.readLine();
         } catch (IOException e) {
