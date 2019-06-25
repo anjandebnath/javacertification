@@ -451,8 +451,28 @@ There are four types of method references (assuming a class named Person with **
                 e.printStackTrace();
             }
         
-            }   
+            } 
             
+            
+## Java SE Date and Time
+
+- LocalDateTime uses the default time zone, but Instant doesn’t. It uses the Greenwich time 
+
+
+        LocalDateTime is: 2019-06-25T15:59:51.802 
+        Instant is: 2019-06-25T09:59:51.802Z 
+        
+                   
+- Summary of the Instant , Period and Duration Class
+
+|**Instant**                                              | **Period**                                           | **Duration**         
+|---                                                      |---                                                   | ---                    
+|Represents machine time starting from Unix Epoch         |Represents time in terms of Y,M & D                   |represents time in terms of H,M,S & Ns                 
+|Typically used for **Timestamp**                         |used to difference between **LocalDate** Objects      |used to difference between **LocalTime** Objects      
+
+
+- **ZoneId identifies a time zone**, such as Asia/Kolkata. Another class, **ZoneOffset, represents the time-zone
+  offset from UTC/Greenwich**. For example, zone ID “Asia/Dhaka” has a zone offset of +06:00 (plus 6 hours) from UTC/Greenwich.            
             
  ## Java Concurrency 
  
