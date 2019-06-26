@@ -29,10 +29,37 @@
   
   - protected member can be access within the package and outside the package but within the child classes by using **extends**.
   
+  
+- Runtime polymorphism is at runtime, **based on the actual dynamic type of the object**, an appropriate method is invoked. 
+  This mechanism is known as **dynamic method resolution** or **dynamic method invocation**.  
+  
+          public class TestShape {
+              public static void main(String []args) {
+              
+                  Shape shape1 = new Circle(10);
+                  System.out.println(shape1.area());
+                  
+                  Shape shape2 = new Square(10);
+                  System.out.println(shape2.area());
+              }
+          }
+          
+  - here the area() method is called based on the dynamic type of the Shape.
+  
+  
+- Java supports `four` types of inheritance which are:
+  
+  - **Single Inheritance:** In single inheritance, one class inherits the properties of another i.e there will be only one parent as well as one child class.
+  - **Multilevel Inheritance:** When a class is derived from a class which is also derived from another class, i.e. a class having more than one parent class but at different levels, such type of inheritance is called Multilevel Inheritance.
+  - **Hierarchical Inheritance:** When a class has more than one child classes (subclasses) or in other words, more than one child classes have the same parent class, then such kind of inheritance is known as hierarchical.
+  - **Hybrid Inheritance:** Hybrid inheritance is a combination of two or more types of inheritance.  
+  
+  
     
 - **Serialization is a mechanism of converting the state of an object into a byte stream. Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory.**
 
      ![](https://github.com/anjandebnath/javacertification/blob/master/pdf/serialize-deserialize-java.png)
+          
 
 - **Use singleton in a smart way so it is well managed in multi thread**.
 
@@ -76,6 +103,11 @@
         
             abstract int foo();
         }
+        
+- **If an interface having no data member and member functions is called Marker Interface.** 
+
+        public interface Serializable{
+        }        
 
 - **If 2 different interfaces contain method that has same name then it is called diamond problem and in that case we can use *super* *Interface1.super.method()* like this**.
 
