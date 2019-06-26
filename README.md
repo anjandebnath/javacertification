@@ -14,6 +14,8 @@
 
 - **Serialization is a mechanism of converting the state of an object into a byte stream. Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory.**
 
+![](https://github.com/anjandebnath/javacertification/blob/master/pdf/serialize-deserialize-java.png)
+
 - **Use singleton in a smart way so it is well managed in multi thread**.
 
         public static class SingleTonClassHolder{
