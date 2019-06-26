@@ -12,6 +12,24 @@
 
 ## Key points to code review
 
+## Class Design with access modifiers
+
+- in fact, when no access modifier is specified, the member has **default** access.
+
+- Note that **Default** access is also known as **package-protected access.**
+
+- Private access is comparable to a safe deposit box room in a bank, which can only be accessed by a set of authorized
+  personnel and safe deposit box owners.
+
+- Protected and default accesses are comparable to the situation in an office where a conference room is
+  accessible only to one department.
+  
+- One significant difference between **Protected** and **Default** access modifiers arises when 
+  we talk about a **subclass belonging to another package than its superclass**.
+  
+  - protected member can be access within the package and outside the package but within the child classes by using **extends**.
+  
+    
 - **Serialization is a mechanism of converting the state of an object into a byte stream. Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory.**
 
      ![](https://github.com/anjandebnath/javacertification/blob/master/pdf/serialize-deserialize-java.png)
@@ -84,6 +102,24 @@
         // dos something
         } 
         
+        
+## Generics in detail
+
+- **Use Bounded Wildcards to Increase API Flexibility**
+
+   - List is neither subtype nor a supertype of List. There's a special kind of parameterized type called a BOUNDED WILDCARD TYPE.
+   
+   - List of some subtype of E' can be written as List<? extends E> - **Upper bounded wildcards.**
+   
+   - List of some supertype of E' can be written as List<? super E> - **Lower bounded wildcards.**
+   
+        
+   
+   - To write the method that works on lists of **Number** and the **subtypes** of Number, such as **Integer**, **Double**, and **Float**, you would specify List<? extends Number>. 
+   
+   - To write the method that works on lists of **Integer** and the **supertypes** of Integer, such as **Integer**, **Number**, and **Object**, you would specify List<? super Integer>.
+   
+   
 - **Use *Comparable* Interface to compare one object to other**
 
         public class Person implements Comparable<Person>{
@@ -103,25 +139,10 @@
 
 - **compare(obj1, obj2) is the method of the *Comparator* interface that is called on some object to compare two other objects** 
 
-        The Comparator interface is typically used for sorting data structures (such as Collections.sort or Arrays.sort).  
-        
-## Generics in detail
-
-- **Use Bounded Wildcards to Increase API Flexibility**
-
-   - List is neither subtype nor a supertype of List. There's a special kind of parameterized type called a BOUNDED WILDCARD TYPE.
-   
-   - List of some subtype of E' can be written as List<? extends E> - **Upper bounded wildcards.**
-   
-   - List of some supertype of E' can be written as List<? super E> - **Lower bounded wildcards.**
-   
-   - To write the method that works on lists of **Number** and the subtypes of Number, such as **Integer**, **Double**, and **Float**, you would specify List<? extends Number>. 
-   
-   - To write the method that works on lists of **Integer** and the supertypes of Integer, such as **Integer**, **Number**, and **Object**, you would specify List<? super Integer>.
+        The Comparator interface is typically used for sorting data structures (such as Collections.sort or Arrays.sort).     
 
 
                    
-        
 - **Use stream api on collections** (**filter the list of people who is upper or equal to age 50**)
 
 
