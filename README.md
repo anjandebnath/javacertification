@@ -113,7 +113,7 @@
    
    - List of some supertype of E' can be written as List<? super E> - **Lower bounded wildcards.**
    
-        
+       ![](https://github.com/anjandebnath/javacertification/blob/master/pdf/super.png)
    
    - To write the method that works on lists of **Number** and the **subtypes** of Number, such as **Integer**, **Double**, and **Float**, you would specify List<? extends Number>. 
    
