@@ -1,5 +1,7 @@
 package com.uss.sample.javacertification.concurrency;
 
+import java.util.concurrent.ForkJoinPool;
+
 public class Test {
 
     public static void main(String args[]){
@@ -33,9 +35,12 @@ public class Test {
         executor.shutdown();*/
 
 
-        System.out.println("Sum of 1 to 1_000_000:: "+ForkJoinAdd.startForkJoinSum(1_000_000));
+        //System.out.println("Sum of 1 to 1_000_000:: "+ForkJoinAdd.startForkJoinSum(1_000_000));
 
-        SumOfNUsingForkJoin.countForkJoinSum();
+        //SumOfNUsingForkJoin.countForkJoinSum();
+
+        ForkJoinFibonacci.compute50thFibonacci();
+
 
 
 

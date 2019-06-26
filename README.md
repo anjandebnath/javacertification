@@ -12,6 +12,8 @@
 
 ## Key points to code review
 
+- **Serialization is a mechanism of converting the state of an object into a byte stream. Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory.**
+
 - **Use singleton in a smart way so it is well managed in multi thread**.
 
         public static class SingleTonClassHolder{
@@ -99,7 +101,24 @@
 
 - **compare(obj1, obj2) is the method of the *Comparator* interface that is called on some object to compare two other objects** 
 
-        The Comparator interface is typically used for sorting data structures (such as Collections.sort or Arrays.sort).             
+        The Comparator interface is typically used for sorting data structures (such as Collections.sort or Arrays.sort).  
+        
+## Generics in detail
+
+- **Use Bounded Wildcards to Increase API Flexibility**
+
+   - List is neither subtype nor a supertype of List. There's a special kind of parameterized type called a BOUNDED WILDCARD TYPE.
+   
+   - List of some subtype of E' can be written as List<? extends E> - **Upper bounded wildcards.**
+   
+   - List of some supertype of E' can be written as List<? super E> - **Lower bounded wildcards.**
+   
+   - To write the method that works on lists of **Number** and the subtypes of Number, such as **Integer**, **Double**, and **Float**, you would specify List<? extends Number>. 
+   
+   - To write the method that works on lists of **Integer** and the supertypes of Integer, such as **Integer**, **Number**, and **Object**, you would specify List<? super Integer>.
+
+
+                   
         
 - **Use stream api on collections** (**filter the list of people who is upper or equal to age 50**)
 
@@ -515,6 +534,8 @@ There are four types of method references (assuming a class named Person with **
          AtomicInteger at = new AtomicInteger(0);    
          
 - Fork/Join  framework
+
+Good reference [link](https://www.pluralsight.com/guides/introduction-to-the-fork-join-framework)
   
   - The fork/join framework is available since Java 7, to make it easier to write parallel programs.
   - **Dividing** the task into smaller tasks is `forking`, and **merging** the results from the smaller tasks is `joining`.
@@ -543,7 +564,7 @@ There are four types of method references (assuming a class named Person with **
     
   - Each worker thread in the Fork/Join framework has a work queue, which is implemented using a **Deque.**
   
-  
+  - **One of the main things to consider when implementing an algorithm using fork/join parallelism is choosing the threshold which determines whether a task will execute a sequential computation rather than forking parallel sub-tasks.**
   
   
   
