@@ -48,7 +48,7 @@ public class SearchData {
                 (c, s) -> c.add(s.toUpperCase()),                             // BiConsumer<R,? super T> accumulator
                 (c1, c2) -> c1.addAll(c2));                                   // BiConsumer<R,R> combiner
 
-        //word.forEach(s1-> System.out.println(s1));
+        word.forEach(s1-> System.out.println("collect list to another list:"+s1));
 
 
 
