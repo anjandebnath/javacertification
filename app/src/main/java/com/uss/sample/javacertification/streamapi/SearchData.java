@@ -27,7 +27,7 @@ public class SearchData {
         //System.out.println("search of first "+first.getAsInt());
 
         List<String> myList = Arrays.asList("follow your heart but take your brain with you".split(" "));
-        //myList.stream().distinct().sorted().forEach(System.out::println);
+        myList.stream().distinct().sorted().forEach(System.out::println);
 
         Comparator<String> byLengthComparator = (s1, s2) -> Integer.compare( s1.length(), s2.length());
         Comparator<String> byLettersComparator = (s1, s2) -> s1.compareTo(s2);
@@ -88,6 +88,11 @@ public class SearchData {
                 .collect(Collectors.toList());
 
         students.forEach(System.out::println);
+
+
+        Stream.of("a","b","c","d","e")
+                .parallel()
+                .forEach(s -> System.out.println("Parralele stream:: "+s));
 
 
 
