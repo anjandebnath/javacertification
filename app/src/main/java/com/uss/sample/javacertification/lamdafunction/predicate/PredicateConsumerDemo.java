@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 
 public class PredicateConsumerDemo {
 
+    // api to update student fee
     public static Student updateStudentFee(Student student,
                                            Predicate<Student> predicate,
                                            Consumer<Student> consumer){
@@ -20,7 +21,7 @@ public class PredicateConsumerDemo {
     }
 
 
-
+    // api to update the name
     public static String updateName(Student student,
                                      Predicate<String> predicate,
                                      Function<String, String> function){
@@ -31,6 +32,7 @@ public class PredicateConsumerDemo {
         return null;
     }
 
+    // api to get new student object
     public static Student getStudent(){
 
         Supplier<Student> studentSupplier = () -> {
