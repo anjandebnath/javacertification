@@ -239,6 +239,61 @@ There are four types of method references (assuming a class named Person with **
 |Supplier<T>                      |Takes nothing but returns a value to the caller       |generate(Supplier<? super T> supplier)
 
 
+### Example to get more clear idea 
+
+   - Lets consider a Student class with name, grade and fee to be paid.
+   - Each student has some discount which is decided based on the Student’s grade. 
+   - This method uses the **Predicate to decide if the student discount on the fee has to be updated** and then uses the 
+     **Consumer implementation to update the discount.** 
+     
+     
+         public static Student updateStudentFee(Student student, 
+                   Predicate<Student> predicate, 
+                   Consumer<Student> consumer){
+         
+             //Use the predicate to decide when to update the discount.
+             if ( predicate.test(student)){
+               //Use the consumer to update the discount value.
+               consumer.accept(student);
+             }
+             return student;
+           }
+           
+           
+         Student student1 = new Student("Ashok","Kumar", 8.5);
+         student1 = updateStudentFee(student1,
+                 //Lambda expression for Predicate interface
+                 student -> student.grade > 8.5,
+                 //Lambda expression for Consumer inerface
+                 student -> student.feeDiscount = 30.0);
+         student1.printFee();  
+                 
+                 
+   - Another example is lets change the last name of the student.
+   - This method uses the **Function to take the current last name as input and return the updated name**
+   
+         
+         public static String updateName(Student student,
+                                              Predicate<String> predicate,
+                                              Function<String, String> function){
+                 if( predicate.test(student.lastName)){
+                     return function.apply(student.lastName);
+                 }
+         
+                 return null;
+         }
+             
+             
+         Student student3 = new Student("Monoj", "Tiwari", 5.5);
+         
+         String name = updateName(student3,
+                 str -> str.contains("Tiwari"),
+                 str -> str.replace("Tiwari", "Paramanik"));
+         if(name!= null){
+             student3.lastName = name;
+         }    
+
+
 - **primitive versions of functional interfaces**
 
 
