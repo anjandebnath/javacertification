@@ -3,6 +3,7 @@ package com.uss.sample.javacertification.lamdafunction.predicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class PredicateConsumerDemo {
 
@@ -28,6 +29,15 @@ public class PredicateConsumerDemo {
         }
 
         return null;
+    }
+
+    public static Supplier<Student> getStudent(){
+
+        Supplier<Student> studentSupplier = () -> {
+            return new Student("Varun", "Dhawan", 7.5);
+        };
+
+        return studentSupplier;
     }
 
 
@@ -61,6 +71,11 @@ public class PredicateConsumerDemo {
         }
 
         System.out.println("Updated name:: " + student3.lastName);
+
+
+        // Use of Supplier
+        Student student4 = getStudent().get();
+
 
     }
 }
