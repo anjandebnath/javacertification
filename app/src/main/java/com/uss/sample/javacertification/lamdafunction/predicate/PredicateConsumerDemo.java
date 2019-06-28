@@ -31,13 +31,13 @@ public class PredicateConsumerDemo {
         return null;
     }
 
-    public static Supplier<Student> getStudent(){
+    public static Student getStudent(){
 
         Supplier<Student> studentSupplier = () -> {
             return new Student("Varun", "Dhawan", 7.5);
         };
 
-        return studentSupplier;
+        return studentSupplier.get();
     }
 
 
@@ -74,7 +74,7 @@ public class PredicateConsumerDemo {
 
 
         // Use of Supplier
-        Student student4 = getStudent().get();
+        Student student4 = getStudent();
 
 
     }
